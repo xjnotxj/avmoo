@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/stylesheets/animate.css">
+</head>
+<style>
+
+    * {
+        text-align: center;
+    }
+
+    #main {
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    #header .thumbnail {
+        display: block;
+        height: 80px;
+    }
+
+    #body .thumbnail {
+        display: block;
+        height: 250px;
+    }
+
+    #archived {
+        position: relative;
+        top: 10px;
+    }
+
+    .disable {
+        filter: gray;
+        -webkit-filter: grayscale(100%);
+        cursor: no-drop;
+    }
+
+    #cover {
+        /*height: 600px;*/
+    }
+
+    h2 {
+        -vendor-animation-duration: 100s;
+        -vendor-animation-delay: 0s;
+        -vendor-animation-iteration-count: infinite;
+    }
+
+</style>
+<body>
+
+<input id="number_hide" type="hidden" value="{{ number }}">
+<input id="title_hide" type="hidden" value="{{ title_2 }}">
+<input id="cover_hide" type="hidden" value="{{ cover }}">
+<input id="mark_hide" type="hidden" value="{{ mark }}">
+<input id="time_hide" type="hidden" value="{{ time }}">
+<input id="label_hide" type="hidden" value="{{ label }}">
+<input id="isLikeOrIsPity" type="hidden" value="{{ isLikeOrIsPity  }}">
+<input id="cache" type="hidden" value="{{ cache  }}">
+
+<div id="main">
+
+    <div class="row" style="margin-bottom: -20px">
+        <div class="col-md-12 col-xs-12">
+            {% if !SkipTip %}
+            {% set SkipTip_class = "label-danger" %}
+            {% else %}
+            {% set SkipTip_class = "label-default" %}
+            {% endif %}
+            <h2 style="margin-top: -20px"><span class="label label-default">{{ SkipTip }}</span>&nbsp;<span id="title"
+                                                                                                            class="label {{SkipTip_class}}">
+
+                <a
+                        target="_blank" href="{{origin_url}}"><span class="label {{SkipTip_class}}"><span
+                        style="top:1px"
+                        class="glyphicon glyphicon-link"
+                        aria-hidden="true"></span></span></a>{{ title_2 }} - {{ title }}</span>
+            </h2>
+        </div>
+    </div>
+    <hr/>
+    <div id="header" style="margin-top: -10px">
+        <div class="row">
+
+            <div class="col-md-2 col-xs-2">
+
+                <div class="row">
+
+                    <!--<div class="input-group col-xs-12 col-md-12">-->
+                    <!--<input type="text" class="form-control" aria-label="...">-->
+                    <!--<div class="input-group-btn">-->
+                    <!--<button class="btn btn-default" type="button">Here!</button>-->
+                    <!--<button class="btn btn-default" type="button">!</button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                    {% for x in actor %}
+                    {% if loop.first %}
+
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            {% endif %}
+                            <div class="col-xs-6 col-md-6" style="  padding: 4px;">
+                                <span class="actor" style="font-size: 10px"> {{ x.name }}</span>
+                                <a target="_blank" href="avmoo/actor_archived?actor={{x.name}}" class="thumbnail"
+                                   style=" background: url('{{ x.icon }}');background-repeat: no-repeat; background-size: contain;     background-position: 50% 50%;">
+                                </a>
+
+                            </div>
+                            {% if loop.last %}
+
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-md-8 col-xs-8">
+                <img id="cover" src="{{cover}}" class="img-responsive img-thumbnail">
+            </div>
+
+            <div class="col-md-2 col-xs-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p><span class="label label-default"><span class="glyphicon glyphicon-flag"
+                                                                   aria-hidden="true"></span> mark</span><br/> {{mark}}
+                        </p>
+                        <p><span class="label label-default"><span class="glyphicon glyphicon-time"
+                                                                   aria-hidden="true"></span> time</span><br/>{{time}}
+                        </p>
+                        <p><span class="label label-default"><span class="glyphicon glyphicon-tags"
+                                                                   aria-hidden="true"></span> label</span><br/>{{label}}
+                        </p>
+                        <hr/>
+                        <a target="_blank" href="http://www.dmm.co.jp/search/=/searchstr={{mark}}"><img
+                                src="/images/dmm.png" class="img-thumbnail"></a>
+                        <br/>
+                        <br/>
+                        <a target="_blank" href="https://btso.pw/search/{{mark}}"><img src="/images/btsow.png"
+                                                                                       class="img-thumbnail"></a>
+                    </div>
+                </div>
+                <button style="display: none" id="cancel" class="btn btn-default btn-lg" type="button">
+                    cancel
+                </button>
+                <hr/>
+                <button id="like" class="btn btn-danger btn-lg" type="button">
+                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Like it !
+                </button>
+                <a class="btn-md" id="like_number" target="_blank" href="avmoo/like_archived">like_archived <span
+                        class="badge">{{like_count}}</span></a>
+                <br/>
+                <br/>
+                <button id="pity" class="btn btn-warning btn-lg" type="button">
+                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Pity it !
+                </button>
+                <a class="btn-md" id="pity_number" target="_blank" href="avmoo/pity_archived">pity_archived <span
+                        class="badge">{{pity_count}}</span></a>
+            </div>
+
+        </div>
+    </div>
+    <span id="helpBlock" class="help-block"><small>Tips: press <kbd>esc</kbd> hide webpage, press <kbd><-</kbd> <kbd>-></kbd> prev or next webpage.</small></span>
+    <hr/>
+    <div id="body">
+        {% for x in image %}
+        {% if loop.first %}
+        <div class="row">
+            {% endif %}
+            <div class="col-xs-6 col-md-6">
+                <a target="_blank" href="{{ x }}"> <img class="img-responsive img-thumbnail" src="{{ x }}"></a>
+            </div>
+            </tr>
+            {% if loop.last %}
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <a target="_blank" href="avmoo/clearLoading">
+        <button type="button" class="btn btn-link "><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            click here clean loading
+        </button>
+    </a>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> http://localhost:3000/hide/avmoo/loading?number=6e1z&size=100</span>
+
+    <br/>
+    <br/>
+</div>
+
+</body>
+
+<script src="/javascripts/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="/javascripts/bootstrap.min.js"
+></script>
+
+<script>
+
+    $.fn.extend({
+        animateCss: function (animationName, callback) {
+            var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+            this.addClass('animated ' + animationName).one(animationEnd, function () {
+                $(this).removeClass('animated ' + animationName);
+                if (callback) {
+                    callback();
+                }
+            });
+            return this;
+        }
+    });
+
+    $(document).ready(function () {
+
+
+
+
+        //archived
+        $("#archived").click(function () {
+//        location.href =
+            window.open("/search/archived")
+        })
+
+
+        //go
+        $("#go").click(function () {
+            var keyword = $("#keyword").val();
+            location.href = "/?keyword=" + keyword
+        })
+
+        //like
+        $("#like").click(function () {
+            sendAddAjax("like");
+        })
+        //pity
+        $("#pity").click(function () {
+            sendAddAjax("pity");
+        })
+
+        //like
+        $("#cancel").click(function () {
+            sendDelAjax("like");
+        })
+
+        var number_hide = $("#number_hide").val();
+        var title_hide = $("#title_hide").val();
+        var cover_hide = $("#cover_hide").val();
+        var mark_hide = $("#mark_hide").val();
+        var time_hide = $("#time_hide").val();
+        var label_hide = $("#label_hide").val();
+        var actor_hide = $(".actor").text().trim();
+        var isLikeOrIsPity = $("#isLikeOrIsPity").val();
+        var cache = $("#cache").val();
+        if (cache == "1") {
+            //if cache
+            $('h2').animateCss('shake');
+        }
+
+        console.log("number_hide:" + number_hide)
+        //判断是否isLike or isPity
+        if (isLikeOrIsPity) {
+            $("#cancel").show();
+            $("#cancel").text("cancel " + isLikeOrIsPity);
+            $("#like").hide();
+            $("#pity").hide();
+        }
+
+        function sendAddAjax(param) {
+
+            let isLikeOrIsPity = ""
+
+            var data = {
+                number: number_hide,
+                title: title_hide,
+                cover: cover_hide,
+                mark: mark_hide,
+                time: time_hide,
+                label: label_hide,
+                actor: actor_hide,
+            };
+
+            if (param == "like") {
+                isLikeOrIsPity = "like"
+                data.like = true;
+            } else if (param == "pity") {
+                isLikeOrIsPity = "pity"
+                data.pity = true;
+            } else {
+                return false;
+            }
+
+
+            $.ajax({
+                url: "/hide/avmoo/add",
+                method: "POST",
+                data: data
+            }).done(function (data) {
+
+                if (data.code == 1 || data.code == -5) {
+                    $("#cancel").show();
+                    $("#cancel").text("cancel " + isLikeOrIsPity);
+                    $("#like").hide();
+                    $("#pity").hide();
+                } else {
+                    alert("operate error");
+                }
+
+            }).fail(function (err) {
+                console.log(err)
+                alert("ajax error");
+            })
+        }
+
+        function sendDelAjax(param) {
+
+            var data = {
+                mark: mark_hide,
+            };
+
+            $.ajax({
+                url: "/hide/avmoo/del",
+                method: "POST",
+                data: data
+            }).done(function (data) {
+
+                if (data.code == 1) {
+                    $("#cancel").hide();
+                    $("#like").show();
+                    $("#pity").show();
+                }
+                else {
+                    alert("operate error");
+                }
+            }).fail(function (err) {
+                console.log(err)
+                alert("ajax error");
+            })
+        }
+
+        $("#body .thumbnail").click(function () {
+
+            if (!$(this).hasClass("disable")) {
+                $(this).addClass("disable");
+                let img_url = $(this).css("background-image").split('"');
+                window.open(img_url[1])
+            } else {
+                return false;
+            }
+
+        })
+
+        $('body').bind('keyup', function (event) {
+            if (event.keyCode == "13") {
+                //回车执行查询
+                $("#go").click();
+                return false;
+            }
+            if (event.keyCode == "27") {
+                //esc执行查询
+                $("body").toggle();
+                return false;
+            }
+            if (event.keyCode == "37") {
+                //<-执行查询
+                var t = parseInt(number_hide, 36);
+                t--;
+                t = t.toString(36);
+                location.href = "avmoo?number=" + t;
+                return false;
+            }
+            if (event.keyCode == "39" || event.keyCode == "32") {
+                //-> 或者 空格执行查询
+                var t = parseInt(number_hide, 36);
+                t++;
+                t = t.toString(36);
+                location.href = "avmoo?number=" + t;
+                return false;
+            }
+
+
+        });
+
+    })
+    ;
+</script>
+
+</html>

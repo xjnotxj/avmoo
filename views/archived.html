@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<style>
+
+    * {
+        text-align: center;
+
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+    }
+
+    table, tr, th, td {
+        text-align: center;
+    }
+
+
+</style>
+<body>
+
+<input id="keyword_old" type="hidden" value="{{ keyword }}">
+
+<h1><span id="title" class="label label-success">{{ title }}</span></h1>
+<hr/>
+
+<div class="row">
+
+
+    {% for x in data %}
+    {% if loop.first %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    index
+                </th>
+                <th>
+                    keyword
+                </th>
+                <th>
+                    updatedAt
+                </th>
+                <th>
+                    remark
+                </th>
+            </tr>
+            {% endif %}
+            <tr>
+                <td>
+                    {{ loop.index }}
+                </td>
+                <td>
+                    <a href="/?keyword={{x.keyword}}"> {{ x.keyword }}</a>
+                </td>
+                <td>
+                    {{ x.updatedAt }}
+                </td>
+                <td>
+                    {{ x.remark }}
+                </td>
+            </tr>
+            {% if loop.last %}
+        </table>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+
+</div>
+
+
+</div>
+
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<script>
+
+
+</script>
+
+</html>
