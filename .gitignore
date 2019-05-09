@@ -3,3 +3,5 @@
 /node_modules/
 
 /upload/
+/.vscode
+/dump.rdb
