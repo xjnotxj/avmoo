@@ -12,6 +12,8 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
+    "https-proxy-agent": "^2.1.1",
+    "iconv-lite": "^0.4.19",
     "image-downloader": "^3.3.0",
     "jade": "~1.11.0",
     "moment": "^2.20.1",
@@ -20,6 +22,9 @@
     "request": "^2.83.0",
     "rimraf": "^2.6.2",
     "serve-favicon": "~2.4.2",
+    "superagent": "^3.8.2",
+    "superagent-charset": "^1.2.0",
+    "superagent-proxy": "^1.0.2",
     "swig": "^1.4.2",
     "underscore": "^1.8.3"
   }

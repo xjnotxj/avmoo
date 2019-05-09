@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
@@ -10,7 +11,6 @@
     <link rel="stylesheet" href="/stylesheets/animate.css">
 </head>
 <style>
-
     * {
         text-align: center;
     }
@@ -20,7 +20,8 @@
         padding-right: 3%;
     }
 
-    html, body {
+    html,
+    body {
         width: 100%;
         height: 100%;
         position: relative;
@@ -56,158 +57,179 @@
         -vendor-animation-delay: 0s;
         -vendor-animation-iteration-count: infinite;
     }
-
 </style>
+
 <body>
 
-<input id="number_hide" type="hidden" value="{{ number }}">
-<input id="title_hide" type="hidden" value="{{ title_2 }}">
-<input id="cover_hide" type="hidden" value="{{ cover }}">
-<input id="mark_hide" type="hidden" value="{{ mark }}">
-<input id="time_hide" type="hidden" value="{{ time }}">
-<input id="label_hide" type="hidden" value="{{ label }}">
-<input id="isLikeOrIsPity" type="hidden" value="{{ isLikeOrIsPity  }}">
-<input id="cache" type="hidden" value="{{ cache  }}">
+    <input id="number_hide" type="hidden" value="{{ number }}">
+    <input id="title_hide" type="hidden" value="{{ title_2 }}">
+    <input id="cover_hide" type="hidden" value="{{ cover }}">
+    <input id="mark_hide" type="hidden" value="{{ mark }}">
+    <input id="time_hide" type="hidden" value="{{ time }}">
+    <input id="label_hide" type="hidden" value="{{ label }}">
+    <input id="isLikeOrIsPity" type="hidden" value="{{ isLikeOrIsPity  }}">
+    <input id="cache" type="hidden" value="{{ cache  }}">
 
-<div id="main">
+    <div id="main">
 
-    <div class="row" style="margin-bottom: -20px">
-        <div class="col-md-12 col-xs-12">
-            {% if !SkipTip %}
-            {% set SkipTip_class = "label-danger" %}
-            {% else %}
-            {% set SkipTip_class = "label-default" %}
-            {% endif %}
-            <h2 style="margin-top: -20px"><span class="label label-default">{{ SkipTip }}</span>&nbsp;<span id="title"
-                                                                                                            class="label {{SkipTip_class}}">
-
-                <a
-                        target="_blank" href="{{origin_url}}"><span class="label {{SkipTip_class}}"><span
-                        style="top:1px"
-                        class="glyphicon glyphicon-link"
-                        aria-hidden="true"></span></span></a>{{ title_2 }} - {{ title }}</span>
-            </h2>
-        </div>
-    </div>
-    <hr/>
-    <div id="header" style="margin-top: -10px">
         <div class="row">
+            <div class="col-md-12 col-xs-12" style="margin-top: -21px; ">
+                {% if !SkipTip %} {% set SkipTip_class = "label-danger" %} {% else %} {% set SkipTip_class = "label-default" %} {% endif
+                %}
+                <h2>
 
-            <div class="col-md-2 col-xs-2">
+                    {% if SkipTip %}
+                    <span class="label label-default">{{ SkipTip }}</span>
+                    &nbsp; {% endif %}
 
-                <div class="row">
+                    <span id="title" class="label {{SkipTip_class}}">
 
-                    <!--<div class="input-group col-xs-12 col-md-12">-->
-                    <!--<input type="text" class="form-control" aria-label="...">-->
-                    <!--<div class="input-group-btn">-->
-                    <!--<button class="btn btn-default" type="button">Here!</button>-->
-                    <!--<button class="btn btn-default" type="button">!</button>-->
-                    <!--</div>-->
-                    <!--</div>-->
+                        <a target="_blank" href="{{origin_url}}">
+                            <span class="label {{SkipTip_class}}">
+                                <span style="top:1px" class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                            </span>
+                        </a>{{ title_2 }} - {{ title }}</span>
+                </h2>
+            </div>
+        </div>
+        <!--<hr/>-->
+        <div id="header" style="margin-top: -15px">
+            <div class="row">
 
-                    {% for x in actor %}
-                    {% if loop.first %}
+                <div class="col-md-2 col-xs-2">
 
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            {% endif %}
-                            <div class="col-xs-6 col-md-6" style="  padding: 4px;">
-                                <span class="actor" style="font-size: 10px"> {{ x.name }}</span>
-                                <a target="_blank" href="avmoo/actor_archived?actor={{x.name}}" class="thumbnail"
-                                   style=" background: url('{{ x.icon }}');background-repeat: no-repeat; background-size: contain;     background-position: 50% 50%;">
-                                </a>
+                    <div class="row">
+
+                        <!--<div class="input-group col-xs-12 col-md-12">-->
+                        <!--<input type="text" class="form-control" aria-label="...">-->
+                        <!--<div class="input-group-btn">-->
+                        <!--<button class="btn btn-default" type="button">Here!</button>-->
+                        <!--<button class="btn btn-default" type="button">!</button>-->
+                        <!--</div>-->
+                        <!--</div>-->
+
+                        {% for x in actor %} {% if loop.first %}
+
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                {% endif %}
+                                <div class="col-xs-6 col-md-6" style="  padding: 4px;">
+                                    <span class="actor" style="font-size: 10px"> {{ x.name }}</span>
+                                    <a target="_blank" href="avmoo/actor_archived?actor={{x.name}}" class="thumbnail" style=" background: url('{{ x.icon }}');background-repeat: no-repeat; background-size: contain;     background-position: 50% 50%;">
+                                    </a>
+
+                                </div>
+                                {% if loop.last %}
 
                             </div>
-                            {% if loop.last %}
+                        </div>
+                        {% endif %} {% endfor %}
+                    </div>
+                </div>
 
+                <div class="col-md-8 col-xs-8">
+                    <img id="cover" src="{{cover}}" class="img-responsive img-thumbnail">
+                </div>
+
+                <div class="col-md-2 col-xs-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>
+                                <span class="label label-default">
+                                    <span class="glyphicon glyphicon-flag" aria-hidden="true"></span> mark</span>
+                                <br/> {{mark}}
+                            </p>
+                            <p>
+                                <span class="label label-default">
+                                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span> time</span>
+                                <br/>{{time}}
+                            </p>
+                            <p>
+                                <span class="label label-default">
+                                    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> label</span>
+                                <br/>{{label}}
+                            </p>
+                            <hr/>
+                            <a target="_blank" href="http://www.dmm.co.jp/search/=/searchstr={{mark}}">
+                                <img src="/images/dmm.png" class="img-thumbnail">
+                            </a>
+                            <br/>
+                            <br/>
+                            <a target="_blank" href="https://btsow.pw/search/{{mark}}">
+                                <img src="/images/btsow.png" class="img-thumbnail">
+                            </a>
                         </div>
                     </div>
-                    {% endif %}
-                    {% endfor %}
+                    <button style="display: none" id="cancel" class="btn btn-default btn-lg" type="button">
+                        cancel
+                    </button>
+                    <hr/>
+                    <button id="like" class="btn btn-danger btn-lg" type="button">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Like it !
+                    </button>
+                    <a class="btn-md" id="like_number" target="_blank" href="avmoo/like_archived">like_archived
+                        <span class="badge">{{like_count}}</span>
+                    </a>
+                    <br/>
+                    <br/>
+                    <button id="pity" class="btn btn-warning btn-lg" type="button">
+                        <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Pity it !
+                    </button>
+                    <a class="btn-md" id="pity_number" target="_blank" href="avmoo/pity_archived">pity_archived
+                        <span class="badge">{{pity_count}}</span>
+                    </a>
                 </div>
-            </div>
 
-            <div class="col-md-8 col-xs-8">
-                <img id="cover" src="{{cover}}" class="img-responsive img-thumbnail">
             </div>
+        </div>
+        <span id="helpBlock" class="help-block">
+            <small>Tips: press
+                <kbd>esc</kbd> hide webpage, press
+                <kbd>
+                    <-</kbd>
+                        <kbd>-></kbd> prev or next webpage.
+                        <span> ({{see_number}}) </span>
+            </small>
+        </span>
 
-            <div class="col-md-2 col-xs-2">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <p><span class="label label-default"><span class="glyphicon glyphicon-flag"
-                                                                   aria-hidden="true"></span> mark</span><br/> {{mark}}
-                        </p>
-                        <p><span class="label label-default"><span class="glyphicon glyphicon-time"
-                                                                   aria-hidden="true"></span> time</span><br/>{{time}}
-                        </p>
-                        <p><span class="label label-default"><span class="glyphicon glyphicon-tags"
-                                                                   aria-hidden="true"></span> label</span><br/>{{label}}
-                        </p>
-                        <hr/>
-                        <a target="_blank" href="http://www.dmm.co.jp/search/=/searchstr={{mark}}"><img
-                                src="/images/dmm.png" class="img-thumbnail"></a>
-                        <br/>
-                        <br/>
-                        <a target="_blank" href="https://btso.pw/search/{{mark}}"><img src="/images/btsow.png"
-                                                                                       class="img-thumbnail"></a>
-                    </div>
+        <div id="body">
+            {% for x in image %} {% if loop.first %}
+            <div class="row">
+                {% endif %}
+                <div class="col-xs-6 col-md-6">
+                    <a target="_blank" href="{{ x }}">
+                        <img class="img-responsive img-thumbnail" src="{{ x }}">
+                    </a>
                 </div>
-                <button style="display: none" id="cancel" class="btn btn-default btn-lg" type="button">
-                    cancel
-                </button>
-                <hr/>
-                <button id="like" class="btn btn-danger btn-lg" type="button">
-                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Like it !
-                </button>
-                <a class="btn-md" id="like_number" target="_blank" href="avmoo/like_archived">like_archived <span
-                        class="badge">{{like_count}}</span></a>
-                <br/>
-                <br/>
-                <button id="pity" class="btn btn-warning btn-lg" type="button">
-                    <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Pity it !
-                </button>
-                <a class="btn-md" id="pity_number" target="_blank" href="avmoo/pity_archived">pity_archived <span
-                        class="badge">{{pity_count}}</span></a>
+                </tr>
+                {% if loop.last %}
             </div>
-
+            {% endif %} {% endfor %}
         </div>
+
+        <!--<hr>-->
+
+        <a target="_blank" href="avmoo/clearLoading">
+            <button type="button" class="btn btn-link ">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                click here clean loading
+            </button>
+        </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <span>
+            <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
+            <a target="_blank" href="http://localhost:3000/hide/avmoo/loading?number={{cur_number}}&size=16">http://localhost:3000/hide/avmoo/loading?number={{cur_number}}&size=16</a>
+        </span>
+
+        <br/>
+        <br/>
     </div>
-    <span id="helpBlock" class="help-block"><small>Tips: press <kbd>esc</kbd> hide webpage, press <kbd><-</kbd> <kbd>-></kbd> prev or next webpage.</small></span>
-    <hr/>
-    <div id="body">
-        {% for x in image %}
-        {% if loop.first %}
-        <div class="row">
-            {% endif %}
-            <div class="col-xs-6 col-md-6">
-                <a target="_blank" href="{{ x }}"> <img class="img-responsive img-thumbnail" src="{{ x }}"></a>
-            </div>
-            </tr>
-            {% if loop.last %}
-        </div>
-        {% endif %}
-        {% endfor %}
-    </div>
-
-    <hr>
-
-    <a target="_blank" href="avmoo/clearLoading">
-        <button type="button" class="btn btn-link "><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            click here clean loading
-        </button>
-    </a>
-    &nbsp;&nbsp;&nbsp;&nbsp;<span><span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span> http://localhost:3000/hide/avmoo/loading?number=6e1z&size=100</span>
-
-    <br/>
-    <br/>
-</div>
 
 </body>
 
 <script src="/javascripts/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="/javascripts/bootstrap.min.js"
-></script>
+<script src="/javascripts/bootstrap.min.js"></script>
 
 <script>
 
@@ -229,9 +251,11 @@
 
 
 
+
+
         //archived
         $("#archived").click(function () {
-//        location.href =
+            //        location.href =
             window.open("/search/archived")
         })
 
@@ -363,6 +387,16 @@
 
         })
 
+        //预加载下一页
+        var t = parseInt(number_hide, 36);
+        t++;
+        t = t.toString(36);
+        var hint = document.createElement("link")
+        hint.setAttribute("rel", "prerender")
+        hint.setAttribute("href", "avmoo?number=" + t);
+        document.getElementById("helpBlock").appendChild(hint);
+
+
         $('body').bind('keyup', function (event) {
             if (event.keyCode == "13") {
                 //回车执行查询
@@ -395,7 +429,7 @@
         });
 
     })
-    ;
+        ;
 </script>
 
 </html>

@@ -18,3 +18,6 @@ http://localhost:3000/hide/avmoo/loading?number=6e1z&size=100
 3、清除预加载缓存
 
 http://localhost:3000/hide/avmoo/clearLoading 
+
+sudo launchctl limit maxfiles 10000000 10000000
+ulimit -n 10000000
