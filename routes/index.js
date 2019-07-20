@@ -1032,6 +1032,51 @@ router.get('/hide/avmoo/pity_archived', function (req, res, next) {
 
 });
 
+router.get('/hide/avmoo/get', function (req, res, next) {
+
+    models.Avmoo.findOne({ mark:  req.query.mark }).exec(function (err, doc) {
+        if (err) { 
+            console.log(err); return returnValue(res, -3);
+        }
+        models.Avmoo.count({ "pity": true }).exec(function (err, pity_count) {
+
+            if (err) {
+                console.log(err); return returnValue(res, -3);
+            }
+
+            models.Avmoo.count({ "like": true }).exec(function (err, like_count) {
+
+                if (err) {
+                    console.log(err); return returnValue(res, -3);
+                }
+
+                let isLikeOrIsPity = "";
+                if (doc) {
+                    if (doc.like) {
+                        isLikeOrIsPity = "like"
+                    } else if (doc.pity) {
+                        isLikeOrIsPity = "pity"
+                    }
+                }
+
+                return res.json(  {
+                    code: 0,
+                    data: doc, 
+                    like_count, 
+                    pity_count ,
+                    isLikeOrIsPity
+                }); 
+
+            });
+
+        });
+       
+
+    });
+
+
+});
+
 router.get('/hide/avmoo/actor_archived', function (req, res, next) {
 
     let actor = req.query.actor;
