@@ -58,7 +58,7 @@ module.exports = {
     no_page_max_get: 10000,
 
     //avmoo 源地址
-    avmoo_origin_url: "https://javzoo.com/cn",
+    avmoo_origin_url: "https://avmoo.asia/cn",
 
     //提示跳过
     label_skip: ["合集", "女優ベスト・総集編", "VR専用"],
