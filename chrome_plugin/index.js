@@ -40,6 +40,7 @@ $(document).ready(function() {
       // temp_image_box.append(myImage)
       // $("#waterfall").append(temp_image_box);
       $("#waterfall").append(myImage);
+      $(this).remove()
     });
   }
 
