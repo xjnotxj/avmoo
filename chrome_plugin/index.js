@@ -1,5 +1,15 @@
 // 压缩 js ：https://www.css-js.com/
 $(document).ready(function() {
+
+
+  // for index page
+
+  $("#waterfall .item").css("position","relative")
+  $("#waterfall .item").css("top","0")
+  $("#waterfall .item").css("left","0")
+
+
+  // for detail page 
   var title_ele = $(".container h3").clone();
 
   //title
