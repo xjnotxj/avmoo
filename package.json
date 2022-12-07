@@ -11,7 +11,7 @@
     "cheerio": "^1.0.0-rc.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
-    "express": "~4.15.2",
+    "express": "~4.17.3",
     "https-proxy-agent": "^2.2.3",
     "iconv-lite": "^0.4.19",
     "image-downloader": "^3.3.0",
